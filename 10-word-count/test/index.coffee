@@ -37,6 +37,22 @@ describe '10-word-count', ->
     expected = words: 1, lines: 1
     helper input, expected, done
 
-  # !!!!!
-  # Make the above tests pass and add more tests!
-  # !!!!!
+  it 'should count multiple lines', (done) ->
+    input = 'this is line one\nthis is line two'
+    expected = words: 8, lines: 2
+    helper input, expected, done
+
+  it 'should count camel case as multiple words', (done) ->
+    input = 'this line has camelCase extraWords'
+    expected = words: 7, lines: 1
+    helper input, expected, done
+
+  it 'should remove a word with one double quote', (done) ->
+    input = 'this is "one quote test'
+    expected = words: 4, lines: 1
+    helper input, expected, done
+
+  it 'should recognize numbers in text', (done) ->
+    input = 'this is 4word line'
+    expected = words: 4, lines: 1
+    helper input, expected, done
